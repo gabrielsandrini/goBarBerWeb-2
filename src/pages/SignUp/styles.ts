@@ -29,7 +29,7 @@ export const Content = styled.div`
 const appearFromRight = keyframes`
   from {
     opacity:0;
-    transform: translateX(70px);
+    transform: translateX(50px);
     width: 90%;
   }
   to{
