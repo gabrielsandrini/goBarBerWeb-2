@@ -55,7 +55,7 @@ const SignIn: React.FC = () => {
           type: 'error',
           title: 'Erro na autenticação',
           description:
-            'Occoreu um erro ao fazer login, cheque suas credenciais',
+            'Ocorreu um erro ao fazer login, cheque suas credenciais',
         });
       }
     },
@@ -81,7 +81,7 @@ const SignIn: React.FC = () => {
 
             <Button type="submit">Entrar</Button>
 
-            <a href="forgot">Esqueci minha senha</a>
+            <Link to="/forgot-password">Esqueci minha senha</Link>
           </Form>
           <Link to="/signup">
             <FiLogIn />
