@@ -20,7 +20,10 @@ import { useAuth } from '../../hooks/auth';
 interface SignUpFormData {
   name: string;
   email: string;
+
+  old_password: string;
   password: string;
+  password_confirmation: string;
 }
 
 const SignUp: React.FC = () => {
@@ -39,19 +42,31 @@ const SignUp: React.FC = () => {
           email: Yup.string()
             .email('Digite um e-mail válido')
             .required('E-mail obrigatório'),
-          password: Yup.string().min(6, 'No mínimo 6 dígitos'),
+          old_password: Yup.string(),
+          password: Yup.string().when('old_password', {
+            is: val => Boolean(val.length),
+            then: Yup.string().min(6, 'No mínimo 6 dígitos'),
+            otherwise: Yup.string(),
+          }),
+          password_confirmation: Yup.string().oneOf(
+            [Yup.ref('password')],
+            'Confirmação incorreta',
+          ),
         });
 
         await schema.validate(data, { abortEarly: false });
 
-        await api.post('/users', data);
+        const response = await api.put('/profile', data);
+
+        updateUser(response.data);
 
         history.push('/');
 
         addToast({
           type: 'success',
-          title: 'Cadastro realizado!',
-          description: 'Você já pode fazer seu logon no GoBarber!',
+          title: 'Perfil Atualizado!',
+          description:
+            'As informações do perfil foram atualizadas com sucesso!',
         });
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
@@ -64,12 +79,12 @@ const SignUp: React.FC = () => {
 
         addToast({
           type: 'error',
-          title: 'Erro no cadastro',
-          description: 'Occoreu um erro ao fazer cadastro, tente novamente',
+          title: 'Erro ao atualizar perfil',
+          description: 'Ocorreu um erro ao atualizar o perfil',
         });
       }
     },
-    [addToast, history],
+    [addToast, history, updateUser],
   );
 
   const handleAvatarChange = useCallback(

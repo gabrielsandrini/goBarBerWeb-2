@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import React, { useEffect } from 'react';
 import {
   FiAlertCircle,
@@ -36,7 +37,7 @@ const Toast: React.FC<ToastProps> = ({ message, style }: ToastProps) => {
   return (
     <Container
       type={message.type}
-      hasDescription={message.description ? '1' : '0'}
+      has_description={message.description ? '1' : '0'}
       style={style}
     >
       {icons[message.type || 'info']}
