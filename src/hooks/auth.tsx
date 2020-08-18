@@ -75,6 +75,7 @@ const AuthProvider: React.FC = ({ children }) => {
     },
     [data.token],
   );
+
   return (
     <AuthContext.Provider
       value={{ user: data.user, signIn, signOut, updateUser }}
@@ -86,10 +87,6 @@ const AuthProvider: React.FC = ({ children }) => {
 
 function useAuth(): AuthContextData {
   const context = useContext(AuthContext);
-
-  if (!context) {
-    throw new Error('useAuth must be used within a AuthProvider');
-  }
 
   return context;
 }
