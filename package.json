@@ -17,7 +17,7 @@
     "react-scripts": "3.4.0",
     "react-spring": "^8.0.27",
     "styled-components": "^5.1.1",
-    "typescript": "~3.7.2",
+    "typescript": "^3.9.9",
     "uuidv4": "^6.1.0",
     "yup": "^0.29.1"
   },
@@ -26,7 +26,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
     "test:coverage": "yarn test --coverage --watchAll false",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
   },
   "eslintConfig": {
     "extends": "react-app"
